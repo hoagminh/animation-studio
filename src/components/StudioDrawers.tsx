@@ -68,7 +68,6 @@ export const StudioDrawers: React.FC<StudioDrawersProps> = ({
         onClick={(e) => e.stopPropagation()}
         className="relative w-full max-w-2xl h-full rounded-[16px] paper-texture text-[#1E1D1B] shadow-2xl border border-black/15 flex flex-col justify-between overflow-hidden"
       >
-        {/* Top Sheet Navigation Header */}
         <div className="px-6 sm:px-8 py-5 border-b border-[#232220]/10 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
             {(
@@ -104,7 +103,6 @@ export const StudioDrawers: React.FC<StudioDrawersProps> = ({
           </button>
         </div>
 
-        {/* Scrollable Editorial Body */}
         <div
           data-lenis-prevent
           className="flex-1 overflow-y-auto px-6 sm:px-8 py-8 space-y-8"
@@ -126,7 +124,6 @@ export const StudioDrawers: React.FC<StudioDrawersProps> = ({
                 </p>
               </div>
 
-              {/* Studio Metrics Row (Unboxed Editorial Separators) */}
               <div className="grid grid-cols-3 gap-4 py-5 border-y border-[#232220]/10">
                 <div>
                   <div className="font-mono-code text-2xl sm:text-3xl font-medium text-[#18181B]">
@@ -154,7 +151,6 @@ export const StudioDrawers: React.FC<StudioDrawersProps> = ({
                 </div>
               </div>
 
-              {/* Featured Film Stills Quick Access */}
               <div>
                 <h3 className="font-mono-code text-xs tracking-[0.14em] text-[#4A4742] uppercase mb-4">
                   SELECTED STUDIO ARCHIVE (CLICK TO SCREEN)
@@ -439,7 +435,6 @@ export const StudioDrawers: React.FC<StudioDrawersProps> = ({
           )}
         </div>
 
-        {/* Bottom Studio Address Bar */}
         <div className="px-6 sm:px-8 py-4 border-t border-[#232220]/10 flex items-center justify-between text-[11px] font-mono-code text-[#6E6A63]">
           <span>LAYERS STUDIO · SHIBUYA-KU, TOKYO</span>
           <span>HELLO@LAYERS-STUDIO.JP</span>

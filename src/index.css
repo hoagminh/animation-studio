@@ -30,7 +30,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Warm gouache animation paper with fine horizontal lines like the demo video */
 .paper-texture {
   background-color: #ebe6dc;
   background-image:
@@ -44,7 +43,6 @@
     radial-gradient(circle at 50% 35%, rgba(255, 252, 245, 0.65), rgba(222, 215, 202, 0.4));
 }
 
-/* Subtle horizontal paper scanline overlay on video scenes */
 .cinema-paper-grain {
   background-image: repeating-linear-gradient(
     to bottom,
@@ -70,7 +68,6 @@
   animation: marquee-scroll 28s linear infinite;
 }
 
-/* Hide scrollbars cleanly while keeping smooth native scroll */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -79,7 +76,6 @@
   scrollbar-width: none;
 }
 
-/* Lenis smooth scroll base rules */
 html.lenis,
 html.lenis body {
   height: auto;

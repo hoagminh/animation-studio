@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useRef } from 'react';
 import { SCROLLY_CHAPTERS } from '../data/studioData';
 
 interface ScrollyCinemaStageProps {
-  /** Normalized progress within the scrollytelling stage: 0.0 -> 1.0 */
   stageProgress: number;
   onJumpToWorks: () => void;
 }
@@ -103,16 +102,12 @@ function smoothstep(edge0: number, edge1: number, x: number): number {
   return t * t * (3 - 2 * t);
 }
 
-/**
- * Character-by-character progressive motion-blur reveal matching 00:01 - 00:07
- */
 const BlurRevealHeadline: React.FC<{
   lines: string[];
   chapterLocalProgress: number;
   isLightText: boolean;
   centered?: boolean;
 }> = ({ lines, chapterLocalProgress, isLightText, centered = false }) => {
-  // Fade in 0.0 -> 0.22, hold crisp 0.22 -> 0.78, fade out 0.78 -> 1.0
   const enterT = smoothstep(0.0, 0.26, chapterLocalProgress);
   const exitT = smoothstep(0.76, 0.98, chapterLocalProgress);
 
@@ -141,7 +136,6 @@ const BlurRevealHeadline: React.FC<{
             const globalIdx = charCursor++;
             const normIdx = globalIdx / Math.max(1, totalChars - 1);
 
-            // Staggered character reveal & blur wave matching 00:04 "F lms, clips and bra d stories"
             const waveOffset = Math.sin(globalIdx * 1.35) * 0.12 + normIdx * 0.22;
             const charReveal = clamp01((enterT * 1.35) - waveOffset * 0.65);
             const charHide = clamp01((exitT * 1.35) - (1 - normIdx) * 0.25);
@@ -181,7 +175,6 @@ export const ScrollyCinemaStage: React.FC<ScrollyCinemaStageProps> = ({
     progressRef.current = stageProgress;
   }, [stageProgress]);
 
-  // 60fps Drifting Autumn Maple Leaves Canvas Overlay
   useEffect(() => {
     const canvas = leafCanvasRef.current;
     if (!canvas) return;
@@ -217,7 +210,6 @@ export const ScrollyCinemaStage: React.FC<ScrollyCinemaStageProps> = ({
       ctx.clearRect(0, 0, cw, ch);
 
       const p = progressRef.current;
-      // Maple leaves appear subtly in Avenue/Girl/Studio/Skyline chapters
       const leafDensityAlpha =
         p < 0.14
           ? 0
@@ -275,7 +267,6 @@ export const ScrollyCinemaStage: React.FC<ScrollyCinemaStageProps> = ({
     };
   }, []);
 
-  // Determine active chapter and local progress within chapter (0.0 -> 1.0)
   const activeChapterInfo = useMemo(() => {
     const p = clamp01(stageProgress);
     const chapter =
@@ -286,7 +277,6 @@ export const ScrollyCinemaStage: React.FC<ScrollyCinemaStageProps> = ({
     return { chapter, localProgress };
   }, [stageProgress]);
 
-  // Atmospheric cloud-veil transition pulse between chapters (matching 00:03)
   const cloudVeilOpacity = useMemo(() => {
     const p = stageProgress;
     const pulse1 = Math.exp(-Math.pow((p - 0.17) / 0.032, 2)) * 0.55;
@@ -300,7 +290,6 @@ export const ScrollyCinemaStage: React.FC<ScrollyCinemaStageProps> = ({
 
   return (
     <div className="relative w-full h-full rounded-[18px] overflow-hidden bg-[#191816] select-none shadow-2xl">
-      {/* Multiplane Hand-Painted Gouache Scene Beds (1600x1040 Clean Master Artworks) */}
       <div className="absolute inset-0 overflow-hidden">
         {SCENE_LAYERS.map((layer, index) => {
           const fadeIn =
@@ -337,7 +326,6 @@ export const ScrollyCinemaStage: React.FC<ScrollyCinemaStageProps> = ({
         })}
       </div>
 
-      {/* Passing Cumulus Cloud Veil Between Scene Cuts (00:03) */}
       {cloudVeilOpacity > 0.01 && (
         <div
           aria-hidden="true"
@@ -352,13 +340,11 @@ export const ScrollyCinemaStage: React.FC<ScrollyCinemaStageProps> = ({
         </div>
       )}
 
-      {/* 60fps Drifting Autumn Maple Leaves Layer */}
       <canvas
         ref={leafCanvasRef}
         className="absolute inset-0 w-full h-full pointer-events-none z-15"
       />
 
-      {/* Top Gradient Vignette so persistent CinemaHeaderHud is always crisp */}
       <div
         aria-hidden="true"
         className={`absolute top-0 left-0 right-0 h-28 pointer-events-none z-15 transition-opacity duration-500 ${
@@ -368,7 +354,6 @@ export const ScrollyCinemaStage: React.FC<ScrollyCinemaStageProps> = ({
         }`}
       />
 
-      {/* Bottom Gradient Vignette for crisp editorial headline legibility */}
       <div
         aria-hidden="true"
         className={`absolute bottom-0 left-0 right-0 h-56 pointer-events-none z-15 transition-opacity duration-500 ${
@@ -378,7 +363,6 @@ export const ScrollyCinemaStage: React.FC<ScrollyCinemaStageProps> = ({
         }`}
       />
 
-      {/* Chapter 1 Top-Right Studio Philosophy Note (00:01) */}
       {chapter.id === 'chapter-clouds' && (
         <div
           style={{
@@ -392,11 +376,9 @@ export const ScrollyCinemaStage: React.FC<ScrollyCinemaStageProps> = ({
         </div>
       )}
 
-      {/* Foreground Scrollytelling Editorial Typography & Metadata Layer */}
       <div className="relative z-20 w-full h-full flex flex-col justify-between p-6 sm:p-10 md:p-12 pointer-events-none">
         <div />
 
-        {/* Center-Aligned Chapter ("When did you last look up?" at 00:05) */}
         {chapter.alignment === 'center' && (
           <div className="my-auto flex items-center justify-center px-4">
             <BlurRevealHeadline
@@ -408,7 +390,6 @@ export const ScrollyCinemaStage: React.FC<ScrollyCinemaStageProps> = ({
           </div>
         )}
 
-        {/* Bottom-Left or Split-Bottom Chapter Typography */}
         <div className="w-full flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 sm:pb-6">
           {chapter.alignment !== 'center' ? (
             <div className="max-w-3xl">
@@ -423,7 +404,6 @@ export const ScrollyCinemaStage: React.FC<ScrollyCinemaStageProps> = ({
             <div />
           )}
 
-          {/* Right-Side Editorial Caption & Vertical Japanese Stamp */}
           <div className="flex items-end justify-between md:justify-end gap-8">
             {chapter.id === 'chapter-avenue' && (
               <p
@@ -464,7 +444,6 @@ export const ScrollyCinemaStage: React.FC<ScrollyCinemaStageProps> = ({
               </p>
             )}
 
-            {/* Vertical Japanese Stamp ("秋の街 / AUTUMN CITY" or "描く / TO DRAW") */}
             <div
               className={`hidden sm:flex flex-col items-center gap-1 font-mono-code text-[10px] tracking-[0.12em] ${
                 isBrightOpening ? 'text-[#232220]/75' : 'text-[#F7F4EB]/85'
@@ -485,7 +464,6 @@ export const ScrollyCinemaStage: React.FC<ScrollyCinemaStageProps> = ({
         </div>
       </div>
 
-      {/* Opening Bottom Marquee Ticker (00:01) */}
       {chapter.showTicker && (
         <div className="absolute bottom-0 left-0 right-0 z-20 py-2 border-t border-[#232220]/15 bg-[#DCE4EE]/35 backdrop-blur-[2px] overflow-hidden pointer-events-none">
           <div className="animate-marquee flex items-center gap-8 whitespace-nowrap font-mono-code text-[10px] tracking-[0.16em] text-[#232220]/80 uppercase">
@@ -512,7 +490,6 @@ export const ScrollyCinemaStage: React.FC<ScrollyCinemaStageProps> = ({
         </div>
       )}
 
-      {/* Subtle Quick Jump Trigger in Bottom-Right */}
       <div className="absolute bottom-3 right-6 z-30 hidden sm:flex items-center gap-3 pointer-events-auto">
         <button
           type="button"

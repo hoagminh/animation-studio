@@ -33,7 +33,6 @@ export default function App() {
     setShowPreloader(false);
   }, []);
 
-  // Initialize Lenis smooth scrolling & unified RAF loop (only updates React state when values actually change)
   useEffect(() => {
     const lenis = new Lenis({
       lerp: 0.075,
@@ -84,7 +83,6 @@ export default function App() {
     };
   }, []);
 
-  // Pause Lenis when preloader, lightbox modal, or studio drawer is open
   useEffect(() => {
     const lenis = lenisRef.current;
     if (!lenis) return;
@@ -96,7 +94,6 @@ export default function App() {
     }
   }, [showPreloader, activeDrawer, selectedWorkForModal]);
 
-  // Allow infinite wheel & arrow key turning when at the end of the Works scroll track
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       if (activeDrawer || selectedWorkForModal || showPreloader) return;
@@ -190,10 +187,8 @@ export default function App() {
 
   return (
     <div className="relative min-h-[780vh] bg-[#111110]">
-      {/* 00:00 ASCII Cloud Preloader */}
       {showPreloader && <AsciiPreloader onComplete={handlePreloaderComplete} />}
 
-      {/* Persistent Top Cinema HUD Navigation */}
       <CinemaHeaderHud
         isLightSurface={isLightHudSurface}
         timecode={hudTelemetry.timecode}
@@ -206,10 +201,8 @@ export default function App() {
         onReplayPreloader={() => setShowPreloader(true)}
       />
 
-      {/* Pinned Cinema Frame Viewport */}
       <main className="fixed inset-0 p-2.5 sm:p-4 pointer-events-none">
         <div className="relative w-full h-full pointer-events-auto">
-          {/* Stage 1: Scrollytelling 2D Hand-Painted Cinema (00:01 - 00:07) */}
           <div
             className={`absolute inset-0 transition-opacity duration-700 ${
               isWorksStage
@@ -223,7 +216,6 @@ export default function App() {
             />
           </div>
 
-          {/* Stage 2: 3D Dual-Ring Works Showcase on Lined Paper (00:08 - 00:10) */}
           <div
             className={`absolute inset-0 transition-opacity duration-700 ${
               isWorksStage
@@ -243,14 +235,12 @@ export default function App() {
         </div>
       </main>
 
-      {/* Fullscreen Watch Film Lightbox & Paint Bed Inspector */}
       <FilmLightboxModal
         work={selectedWorkForModal}
         onClose={() => setSelectedWorkForModal(null)}
         onSelectWork={setSelectedWorkForModal}
       />
 
-      {/* Studio Editorial Drawers (About, Process, Journal, Careers, Start a Project) */}
       <StudioDrawers
         activeDrawer={activeDrawer}
         onClose={() => setActiveDrawer(null)}

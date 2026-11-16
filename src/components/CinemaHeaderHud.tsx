@@ -39,7 +39,6 @@ export const CinemaHeaderHud: React.FC<CinemaHeaderHudProps> = ({
       className={`fixed top-2.5 sm:top-4 left-2.5 sm:left-4 right-2.5 sm:right-4 z-40 pointer-events-none transition-colors duration-500 ${textPrimary}`}
     >
       <div className="w-full px-5 sm:px-8 pt-4 sm:pt-6 flex items-start justify-between gap-6">
-        {/* Zone 1: Viewfinder Brand Mark 「層」 */}
         <div className="flex items-center gap-3 pointer-events-auto shrink-0">
           <button
             type="button"
@@ -65,12 +64,10 @@ export const CinemaHeaderHud: React.FC<CinemaHeaderHudProps> = ({
           </button>
         </div>
 
-        {/* Zone 2: Editorial Multi-Column Directory & Timecode Readout */}
         <nav
           aria-label="Studio navigation"
           className="hidden md:grid grid-cols-4 gap-x-10 lg:gap-x-16 text-[13px] leading-[1.45] font-sans-ui pointer-events-auto"
         >
-          {/* Column 1: Works Categories */}
           <div className="flex flex-col items-start space-y-0.5">
             {(['Films', 'Clips', 'Brand films'] as WorkCategory[]).map((cat) => {
               const isSelected = activeCategory === cat;
@@ -91,7 +88,6 @@ export const CinemaHeaderHud: React.FC<CinemaHeaderHudProps> = ({
             })}
           </div>
 
-          {/* Column 2: Studio Info */}
           <div className="flex flex-col items-start space-y-0.5">
             <button
               type="button"
@@ -116,7 +112,6 @@ export const CinemaHeaderHud: React.FC<CinemaHeaderHudProps> = ({
             </button>
           </div>
 
-          {/* Column 3: Contact & Careers */}
           <div className="flex flex-col items-start space-y-0.5">
             <button
               type="button"
@@ -134,7 +129,6 @@ export const CinemaHeaderHud: React.FC<CinemaHeaderHudProps> = ({
             </button>
           </div>
 
-          {/* Column 4: Live Timecode & Scene Marker */}
           <div className="flex flex-col items-start font-mono-code text-[11px] leading-[1.35] tracking-[0.08em] select-none">
             <span
               className={`inline-block px-2 py-0.5 border ${borderTone} mb-1 tracking-[0.12em] whitespace-nowrap shrink-0`}
@@ -150,7 +144,6 @@ export const CinemaHeaderHud: React.FC<CinemaHeaderHudProps> = ({
           </div>
         </nav>
 
-        {/* Zone 3: Primary Action Trigger */}
         <div className="flex items-center gap-3 pointer-events-auto shrink-0">
           <button
             type="button"

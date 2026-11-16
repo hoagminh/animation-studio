@@ -107,7 +107,6 @@ export const AsciiPreloader: React.FC<AsciiPreloaderProps> = ({ onComplete }) =>
       }`}
     >
       <div className="relative w-full h-full rounded-[18px] paper-texture overflow-hidden flex flex-col justify-between p-6 sm:p-10 shadow-2xl border border-black/10">
-        {/* Top Row: Brand Mark & Studio Kicker */}
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-center gap-3 text-[#232220]">
             <span className="relative inline-flex items-center justify-center w-8 h-8 text-lg font-display font-semibold tracking-tight">
@@ -125,7 +124,6 @@ export const AsciiPreloader: React.FC<AsciiPreloaderProps> = ({ onComplete }) =>
           </div>
         </div>
 
-        {/* Center Procedural ASCII Cloud Matrix */}
         <div className="my-auto flex items-center justify-center overflow-hidden py-4 select-none">
           <pre
             aria-hidden="true"
@@ -135,7 +133,6 @@ export const AsciiPreloader: React.FC<AsciiPreloaderProps> = ({ onComplete }) =>
           </pre>
         </div>
 
-        {/* Bottom Row: Status & Tabular Percentage */}
         <div className="flex items-end justify-between gap-4">
           <div className="flex items-center gap-4">
             <span className="font-mono-code text-[11px] sm:text-xs tracking-[0.16em] text-[#3A3733] uppercase">

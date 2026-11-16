@@ -78,7 +78,6 @@ export const FilmLightboxModal: React.FC<FilmLightboxModalProps> = ({
         onClick={(e) => e.stopPropagation()}
         className="relative w-full max-w-6xl rounded-[18px] paper-texture text-[#1E1D1B] shadow-2xl border border-white/15 overflow-hidden my-auto"
       >
-        {/* Top Screening Bar */}
         <div className="flex items-center justify-between gap-4 px-6 sm:px-8 py-4 border-b border-[#232220]/10">
           <div className="flex items-center gap-3 font-mono-code text-xs tracking-[0.12em] text-[#4A4742] uppercase">
             <span>{work.indexLabel}</span>
@@ -98,9 +97,7 @@ export const FilmLightboxModal: React.FC<FilmLightboxModalProps> = ({
           </button>
         </div>
 
-        {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12">
-          {/* Left 7 Columns: Rostrum Camera Viewport & Layer Bed Switcher */}
           <div className="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-[#232220]/10">
             <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-[#161514] shadow-inner border border-black/15">
               <img
@@ -121,7 +118,6 @@ export const FilmLightboxModal: React.FC<FilmLightboxModalProps> = ({
                 />
               )}
 
-              {/* Pegbar Registration Overlay in Sketch/Layout modes */}
               {(layerMode === 'sketch' || layerMode === 'layout') && (
                 <div className="absolute inset-0 z-20 pointer-events-none border-8 border-[#EFECE6]/70 flex flex-col justify-between p-3">
                   <div className="flex items-center justify-center gap-6">
@@ -135,7 +131,6 @@ export const FilmLightboxModal: React.FC<FilmLightboxModalProps> = ({
                 </div>
               )}
 
-              {/* Toggle High-Res Master Painting vs Reference Video Loop */}
               <button
                 type="button"
                 onClick={() => setShowOriginalVideo((p) => !p)}
@@ -145,7 +140,6 @@ export const FilmLightboxModal: React.FC<FilmLightboxModalProps> = ({
               </button>
             </div>
 
-            {/* Interactive Paint Bed Switcher */}
             <div className="mt-5">
               <div className="flex items-center justify-between mb-2">
                 <span className="font-mono-code text-[11px] tracking-[0.12em] text-[#57534E] uppercase">
@@ -186,7 +180,6 @@ export const FilmLightboxModal: React.FC<FilmLightboxModalProps> = ({
             </div>
           </div>
 
-          {/* Right 5 Columns: Editorial Notes, Pigment Swatches & Stills */}
           <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between">
             <div>
               <div className="font-mono-code text-xs tracking-[0.08em] text-[#6E6A63]">
@@ -201,7 +194,6 @@ export const FilmLightboxModal: React.FC<FilmLightboxModalProps> = ({
                 {work.synopsis}
               </p>
 
-              {/* Credits & Pigment Kitchen */}
               <div className="mt-6 pt-5 border-t border-[#232220]/10 space-y-3 text-xs font-sans-ui">
                 <div className="flex items-center justify-between">
                   <span className="text-[#6E6A63]">Directed by</span>
@@ -228,7 +220,6 @@ export const FilmLightboxModal: React.FC<FilmLightboxModalProps> = ({
                 </div>
               </div>
 
-              {/* Detail Crop Stills */}
               <div className="mt-6 grid grid-cols-2 gap-3">
                 <div className="aspect-[3/4] rounded overflow-hidden border border-black/10 bg-[#D8D2C5]">
                   <img
@@ -249,7 +240,6 @@ export const FilmLightboxModal: React.FC<FilmLightboxModalProps> = ({
               </div>
             </div>
 
-            {/* Footer Prev/Next Switcher */}
             <div className="mt-6 pt-4 border-t border-[#232220]/10 flex items-center justify-between gap-4">
               <button
                 type="button"

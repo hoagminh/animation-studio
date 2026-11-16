@@ -28,13 +28,11 @@ export const DualRingWorks: React.FC<DualRingWorksProps> = ({
   const lastXRef = useRef(0);
   const velocityRef = useRef(0);
 
-  // Filter works if a category is active, otherwise all 6 works
   const filteredWorks = useMemo(() => {
     if (activeCategory === 'All') return STUDIO_WORKS;
     return STUDIO_WORKS.filter((w) => w.category === activeCategory);
   }, [activeCategory]);
 
-  // Determine active work from current ringAngle (every 30 degrees = 1 slot)
   const activeWork = useMemo(() => {
     const normalized = ((-ringAngle % 360) + 360) % 360;
     const slotIdx = Math.round(normalized / 30) % 12;
@@ -59,7 +57,6 @@ export const DualRingWorks: React.FC<DualRingWorksProps> = ({
     isDraggingRef.current = false;
   };
 
-  // Radius scales nicely for desktop vs mobile
   const cylinderRadius = typeof window !== 'undefined' && window.innerWidth < 768 ? 360 : 580;
 
   return (
@@ -71,7 +68,6 @@ export const DualRingWorks: React.FC<DualRingWorksProps> = ({
       onPointerLeave={handlePointerUp}
       className="relative w-full h-full rounded-[18px] paper-texture overflow-hidden flex flex-col justify-between select-none cursor-grab active:cursor-grabbing shadow-2xl"
     >
-      {/* Top 3D Cylindrical Ring */}
       <div
         className="relative w-full h-[34%] flex items-center justify-center pt-12 sm:pt-16"
         style={{ perspective: '1500px' }}
@@ -89,7 +85,6 @@ export const DualRingWorks: React.FC<DualRingWorksProps> = ({
             const isCategoryMatch =
               activeCategory === 'All' || work.category === activeCategory;
 
-            // Calculate front-facing visibility so back-of-ring cards fade softly
             const relAngle = (((slotDeg + ringAngle) % 360) + 360) % 360;
             const distFromFront = Math.min(relAngle, 360 - relAngle);
             const isFrontHemisphere = distFromFront < 105;
@@ -127,7 +122,6 @@ export const DualRingWorks: React.FC<DualRingWorksProps> = ({
         </div>
       </div>
 
-      {/* Center Horizon: Active Film Title with Motion-Blur Character Reveal */}
       <div className="relative z-20 my-auto flex flex-col items-center justify-center text-center px-6 py-2 pointer-events-auto">
         {activeCategory !== 'All' && (
           <div className="mb-2 flex items-center gap-2 font-mono-code text-[11px] tracking-[0.14em] text-[#57534E] uppercase">
@@ -153,7 +147,6 @@ export const DualRingWorks: React.FC<DualRingWorksProps> = ({
             className="font-sans-ui text-4xl sm:text-6xl md:text-[68px] font-medium tracking-[-0.03em] text-[#1E1D1B] leading-none transition-transform duration-200 group-hover:scale-[1.02]"
           >
             {activeWork.title.split('').map((ch, idx, arr) => {
-              // Center-outward progressive blur matching 00:08 "Paper Weather"
               const mid = (arr.length - 1) / 2;
               const distFromCenter = Math.abs(idx - mid) / Math.max(1, mid);
               const charBlur = motionBlurAmount * (0.35 + (1 - distFromCenter) * 0.85);
@@ -173,7 +166,6 @@ export const DualRingWorks: React.FC<DualRingWorksProps> = ({
           </h2>
         </button>
 
-        {/* Unboxed Editorial Metadata (Zero-Pill Discipline) */}
         <div
           style={{
             filter: motionBlurAmount > 1.5 ? `blur(${(motionBlurAmount * 0.4).toFixed(1)}px)` : 'none',
@@ -188,7 +180,6 @@ export const DualRingWorks: React.FC<DualRingWorksProps> = ({
         </div>
       </div>
 
-      {/* Bottom 3D Cylindrical Ring */}
       <div
         className="relative w-full h-[34%] flex items-center justify-center pb-10 sm:pb-14"
         style={{ perspective: '1500px' }}
@@ -244,7 +235,6 @@ export const DualRingWorks: React.FC<DualRingWorksProps> = ({
         </div>
       </div>
 
-      {/* Bottom Bar: SCROLL TO TURN THE RING & 01 / 06 WATCH FILM */}
       <div className="relative z-30 px-6 sm:px-8 pb-5 sm:pb-6 flex items-center justify-between gap-4 pointer-events-auto">
         <div className="flex items-center gap-3">
           <span className="font-mono-code text-[10px] sm:text-[11px] tracking-[0.14em] text-[#4A4742] uppercase whitespace-nowrap">
