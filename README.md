@@ -162,4 +162,4 @@ npm run preview
 
 ## License
 
-Licensed under the **Apache-2.0** License.
+This project is licensed for **Personal, Non-Commercial Use Only**. See the [LICENSE](./LICENSE) file for full terms. Commercial use, redistribution for profit, or commercial licensing is prohibited without prior written permission.
