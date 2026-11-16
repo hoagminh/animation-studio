@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: "Cormorant Garamond", Georgia, serif;
+    --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+    --paper-bg: #ebe6dc;
+    --paper-line: rgba(24, 24, 27, 0.055);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #111110;
+    color: #18181b;
+    overflow-x: hidden;
+  }
+}
+
+.font-display {
+  font-family: var(--font-serif);
+}
+
+.font-sans-ui {
+  font-family: var(--font-sans);
+}
+
+.font-mono-code {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Warm gouache animation paper with fine horizontal lines like the demo video */
+.paper-texture {
+  background-color: #ebe6dc;
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 5px,
+      rgba(36, 33, 28, 0.055) 5px,
+      rgba(36, 33, 28, 0.055) 6px
+    ),
+    radial-gradient(circle at 50% 35%, rgba(255, 252, 245, 0.65), rgba(222, 215, 202, 0.4));
+}
+
+/* Subtle horizontal paper scanline overlay on video scenes */
+.cinema-paper-grain {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 252, 245, 0) 0px,
+    rgba(255, 252, 245, 0) 4px,
+    rgba(18, 16, 14, 0.09) 4px,
+    rgba(18, 16, 14, 0.09) 5px
+  );
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translate3d(0%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 28s linear infinite;
+}
+
+/* Hide scrollbars cleanly while keeping smooth native scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Lenis smooth scroll base rules */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+

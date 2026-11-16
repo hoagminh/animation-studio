@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      (function () {
+        try {
+          var currentFetch = window.fetch ? window.fetch.bind(window) : undefined;
+          var makeFetchWritable = function (target) {
+            if (!target) return;
+            var desc = Object.getOwnPropertyDescriptor(target, 'fetch');
+            if (desc && desc.configurable !== false && (!desc.writable && !desc.set)) {
+              var getter = desc.get;
+              var val = getter ? getter.call(window) : desc.value || currentFetch;
+              Object.defineProperty(target, 'fetch', {
+                configurable: true,
+                enumerable: true,
+                get: function () {
+                  return val;
+                },
+                set: function (newVal) {
+                  val = newVal;
+                },
+              });
+            }
+          };
+
+          makeFetchWritable(window);
+          makeFetchWritable(Window.prototype);
+
+          var origDefineProperty = Object.defineProperty;
+          Object.defineProperty = function (obj, prop, descriptor) {
+            if (
+              (obj === window || obj === Window.prototype) &&
+              prop === 'fetch' &&
+              descriptor &&
+              descriptor.get &&
+              !descriptor.set
+            ) {
+              var origGet = descriptor.get;
+              var customVal = undefined;
+              return origDefineProperty.call(this, obj, prop, {
+                configurable: true,
+                enumerable: descriptor.enumerable !== false,
+                get: function () {
+                  return customVal !== undefined ? customVal : origGet.call(this);
+                },
+                set: function (v) {
+                  customVal = v;
+                },
+              });
+            }
+            return origDefineProperty.call(this, obj, prop, descriptor);
+          };
+
+          window.addEventListener(
+            'error',
+            function (e) {
+              var msg = (e && e.message) || '';
+              var file = (e && e.filename) || '';
+              if (
+                msg.indexOf('Cannot set property fetch') !== -1 ||
+                file.indexOf('chrome-extension://') === 0
+              ) {
+                e.stopImmediatePropagation();
+                e.preventDefault();
+                return false;
+              }
+            },
+            true
+          );
+        } catch (_) {}
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>層 Layers — Hand-Painted 2D Animation Studio</title>
+    <meta name="description" content="We paint the city one frame at a time. Interactive scrollytelling cinema and 3D works showcase for Layers 2D Animation Studio." />
+    <meta property="og:title" content="層 Layers — Hand-Painted 2D Animation Studio" />
+    <meta property="og:description" content="We paint the city one frame at a time. Interactive scrollytelling cinema and 3D works showcase for Layers 2D Animation Studio." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-[#111110] text-[#18181B] antialiased selection:bg-[#D96B27]/20 selection:text-[#D96B27]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

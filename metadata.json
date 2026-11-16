@@ -1,0 +1,6 @@
+{
+  "name": "Layers — Hand-Painted 2D Animation Studio",
+  "description": "Interactive scrollytelling cinema and 3D dual-ring portfolio for Layers (層), an independent hand-painted 2D gouache animation studio.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
